@@ -4,6 +4,7 @@
 
 
 A JavaScript library that simplifies the initialization and management of WhatsApp Web services using `whatsapp-web.js` and `puppeteer`. It provides an easy-to-use interface for handling authentication, generating QR codes as images, and enabling users to perform additional actions programmatically, such as sending messages.
+For more information, check out the [GitHub repository](https://github.com/fralch/whatsapp-connect) of this project.
 
 ## Features
 
@@ -30,11 +31,25 @@ sudo apt install -y gconf-service libgbm-dev libasound2 libatk1.0-0 libc6 libcai
 ```
 **Note:** These instructions are specific to systems using apt-get, such as Debian and Ubuntu. If you are using a different Linux distribution, make sure to search for and install the equivalent dependencies for your distribution.
 
+## Chromium Browser installation
+It is crucial to install chromium-browser specifically for the library to function correctly. Ensure to follow these detailed steps:
+```bash
+# Install Chromium Browser
+sudo apt install chromium-browser
+```
+### 1. Verify:
+Afterward, verify the installation of chromium-browser by running the following command:
+```bash
+chromium-browser --version
+
+```
+This command will display the installed version of `Chromium-Browser`. Make sure the installation is successful before proceeding with the library usage. The specific version of `chromium-browser` is essential for library compatibility, so confirming its correct installation is crucial.
+
 ## HOW TO USE
 ### 1. Module Imports:
 The necessary modules are imported, including launchBrowser and whatsappClient from the whatsapp-connect library.
 ```javascript
-    const { launchBrowser, whatsappClient } = require('whatsapp-connect');
+const { launchBrowser, whatsappClient } = require('whatsapp-connect');
 ```
 
 ### 2. Function startWhatsAppBot:
@@ -42,13 +57,13 @@ The necessary modules are imported, including launchBrowser and whatsappClient f
 - It registers an event to handle the QR code that will be printed to the console.
 - It initializes the WhatsApp client by calling whatsappClient.initialize().
 ```javascript
-    async function startWhatsAppBot() {
-        const browserInstance = await launchBrowser();
-        whatsappClient.on('qr', async qr => {
-            console.log('Scan the following QR code with your phone:');
-        });
-        whatsappClient.initialize();
-    }
+async function startWhatsAppBot() {
+    const browserInstance = await launchBrowser();
+    whatsappClient.on('qr', async qr => {
+        console.log('Scan the following QR code with your phone:');
+    });
+    whatsappClient.initialize();
+}
 ```
 
 ### 3. Execution of startWhatsAppBot Function:
@@ -113,11 +128,12 @@ app.listen(PORT, () => {
 
 
  
-# WhatsApp Service Library - ESPAÑOL
+# WhatsApp Service Library - Español
 
 
 
 Una biblioteca de JavaScript que simplifica la inicialización y gestión de los servicios de WhatsApp Web utilizando `whatsapp-web.js` y `puppeteer`. Proporciona una interfaz fácil de usar para manejar la autenticación, generar códigos QR como imágenes y permitir a los usuarios realizar acciones adicionales programáticamente, como enviar mensajes.
+Para obtener más información, consulta el [GitHub repository](https://github.com/fralch/whatsapp-connect) de este proyecto.
 
 ## Características
 
@@ -143,6 +159,21 @@ sudo apt-get update
 sudo apt install -y gconf-service libgbm-dev libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
 ```
 **Nota:** Estas instrucciones son específicas para sistemas que utilizan apt-get, como Debian y Ubuntu. Si estás utilizando una distribución de Linux diferente, asegúrate de buscar e instalar las dependencias equivalentes para tu distribución.
+
+## Instalación de Chromium Browser
+Es crucial instalar específicamente `chromium-browser` para que la biblioteca funcione correctamente. Asegúrate de seguir estos pasos detallados:
+```bash
+# Install Chromium Browser
+sudo apt install chromium-browser
+```
+### 1. Verify:
+Luego, verifica la instalación de `chromium-browser` ejecutando el siguiente comando:
+```bash
+chromium-browser --version
+
+```
+Este comando mostrará la versión instalada de `Chromium Browser`. Asegúrate de que la instalación sea exitosa antes de proceder con el uso de la biblioteca. La versión específica de `chromium-browser` es esencial para la compatibilidad de la biblioteca, por lo que es crucial confirmar su correcta instalación.
+
 
 ## CÓMO USAR
 ### 1. Importación de Módulos:
