@@ -86,6 +86,10 @@ It sends a test message to a specific phone number using whatsappClient.sendMess
     }
     SendMsg();
 ```
+#### Important Note on the `targetNumber` Variable:
+In this example, a message is being sent to a Peru number `"51971619505@c.us"`. The country code for Peru is `+51`, but for the library, we omit the `"+"` symbol. Change the country code to the desired one for the number you want to send; for example, `"961610362"` is a mobile number in Peru. Replace it with the desired phone number, and end with `"@c.us"` which is the required format for processing.
+
+
 ### Note on Using the `SendMsg` Function
 
 In step 4 of the script (`index.js`), the function `SendMsg` is used to send a test message through the WhatsApp client. It's important to note that the name of the function `SendMsg` is arbitrary and can be modified according to user preferences. In fact, this function can be integrated in various ways into your application.
@@ -124,7 +128,31 @@ app.listen(PORT, () => {
 });
 
 ```
+### Complete example
 
+```javascript
+const { launchBrowser, whatsappClient } = require('whatsapp-connect');
+
+async function startWhatsAppBot() {
+    const browserInstance = await launchBrowser();
+    whatsappClient.on('qr', async qr => {
+       console.log('Scan the following QR code with your phone:');    
+    });   
+    whatsappClient.initialize();
+}
+startWhatsAppBot();
+
+const SendMsg = async (req, res) => {
+    await whatsappClient.on('ready', async () => {              
+        const targetNumber = `51961610362@c.us`;
+        const message = 'Hola, soy un bot que envía dddddd';
+        await whatsappClient.sendMessage(targetNumber, message);
+        console.log('Message sent successfully');
+    })
+}
+SendMsg();
+
+```
 
 
  
@@ -216,6 +244,9 @@ Envía un mensaje de prueba a un número de teléfono específico usando `whatsa
     }
     SendMsg();
 ```
+#### Nota Importante sobre la Variable `targetNumber`:
+En este ejemplo, se está enviando un mensaje a un número de Perú `"51971619505@c.us"`. El código de país para Perú es `+51`, pero para la biblioteca, omitimos el símbolo `"+"`. Cambia al código de país que desees para el número que quieras enviar, por ejemplo, "961610362" es un número de celular en Perú. Reemplaza con el número de teléfono deseado y termina con `"@c.us"`, que es el formato necesario para ser procesado.
+
 ### Nota sobre el Uso de la Función  `SendMsg` 
 
 En el paso 4 del script (`index.js`), la función `SendMsg` se utiliza para enviar un mensaje de prueba a través del cliente de WhatsApp. Es importante tener en cuenta que el nombre de la función `SendMsg` es arbitrario y puede modificarse según las preferencias del usuario. De hecho, esta función se puede integrar de varias maneras en tu aplicación.
@@ -252,5 +283,31 @@ const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`REST API server listening on port ${PORT}`);
 });
+
+```
+
+### Ejemplo completo
+
+```javascript
+const { launchBrowser, whatsappClient } = require('whatsapp-connect');
+
+async function startWhatsAppBot() {
+    const browserInstance = await launchBrowser();
+    whatsappClient.on('qr', async qr => {
+       console.log('Scan the following QR code with your phone:');    
+    });   
+    whatsappClient.initialize();
+}
+startWhatsAppBot();
+
+const SendMsg = async (req, res) => {
+    await whatsappClient.on('ready', async () => {              
+        const targetNumber = `51961610362@c.us`;
+        const message = 'Hola, soy un bot que envía dddddd';
+        await whatsappClient.sendMessage(targetNumber, message);
+        console.log('Message sent successfully');
+    })
+}
+SendMsg();
 
 ```
