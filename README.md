@@ -100,6 +100,9 @@ In step 4 of the script (`index.js`), the function `SendMsg` is used to send a t
 - **Integration with a REST API:**
   Instead of encapsulating the functionality in a standalone function, you can integrate it directly into an endpoint of your REST API. This allows the execution of the message-sending service through HTTP requests, providing greater flexibility in integration with other parts of your application.
 
+- **IMPORTANT:**
+  Important to add to your `.gitignore` the folders `.wwebjs_auth` and `.wwebjs_cache`, as the WhatsApp session is stored there.
+
 Here's a basic example of how the code might be structured within a REST API endpoint:
 
 ```javascript
@@ -153,6 +156,30 @@ const SendMsg = async (req, res) => {
 SendMsg();
 
 ```
+or 
+
+```javascript
+import { launchBrowser, whatsappClient } from 'whatsapp-connect';
+async function startWhatsAppBot() {   
+    const browserInstance = await launchBrowser();
+    whatsappClient.on('qr', async qr => {
+        console.log('Escanea el siguiente código QR con tu teléfono:');
+    });
+    whatsappClient.initialize();
+}
+startWhatsAppBot();
+
+const SendMsg = async () => {
+    await whatsappClient.on('ready', async () => {
+        const targetNumber = `51971619505@c.us`;
+        const message = 'Hola, soy un bot que envía dddddd';
+        await whatsappClient.sendMessage(targetNumber, message);
+        console.log('Mensaje enviado correctamente');
+    });
+}
+SendMsg();
+
+``` 
 
 
  
@@ -256,6 +283,8 @@ En el paso 4 del script (`index.js`), la función `SendMsg` se utiliza para envi
 
 - **Integración con una API REST:**
   En lugar de encapsular la funcionalidad en una función independiente, puedes integrarla directamente en un punto final de tu API REST. Esto permite la ejecución del servicio de envío de mensajes a través de solicitudes HTTP, brindando una mayor flexibilidad en la integración con otras partes de tu aplicación.
+  - **IMPORTANTE:**
+  Es importante agregar a tu archivo `.gitignore` las carpetas `.wwebjs_auth` y `.wwebjs_cache`, ya que es allí donde se guarda la sesión de WhatsApp.
 
 Aquí tienes un ejemplo básico de cómo podría estructurarse el código dentro de un punto final de una API REST:
 
@@ -311,3 +340,27 @@ const SendMsg = async (req, res) => {
 SendMsg();
 
 ```
+o
+
+```javascript
+import { launchBrowser, whatsappClient } from 'whatsapp-connect';
+async function startWhatsAppBot() {   
+    const browserInstance = await launchBrowser();
+    whatsappClient.on('qr', async qr => {
+        console.log('Escanea el siguiente código QR con tu teléfono:');
+    });
+    whatsappClient.initialize();
+}
+startWhatsAppBot();
+
+const SendMsg = async () => {
+    await whatsappClient.on('ready', async () => {
+        const targetNumber = `51971619505@c.us`;
+        const message = 'Hola, soy un bot que envía dddddd';
+        await whatsappClient.sendMessage(targetNumber, message);
+        console.log('Mensaje enviado correctamente');
+    });
+}
+SendMsg();
+
+``` 
