@@ -1,6 +1,6 @@
 {
   "name": "whatsapp-connect",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A library that simplifies the initialization and management of WhatsApp Web services using whatsapp-web.js and puppeteer. It generates QR codes as images for authentication, allowing users to scan and then perform additional actions programmatically, such as sending messages",
   "main": "src/wmain.js",
   "scripts": {
