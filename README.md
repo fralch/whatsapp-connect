@@ -108,27 +108,52 @@ Here's a basic example of how the code might be structured within a REST API end
 ```javascript
 // Example of integration into a REST API
 const express = require('express');
+const { launchBrowser, whatsappClient } = require('whatsapp-connect');
 const app = express();
 
-app.post('/send-message', async (req, res) => {
-    try {
-        // Logic for sending the message via WhatsApp
-        // ...
+app.use(express.json());
 
-        res.status(200).json({ success: true, message: 'Message sent successfully' });
+async function startWhatsAppBot() {
+    const browserInstance = await launchBrowser();
+    whatsappClient.on('qr', async qr => {
+        console.log('Scan the following QR code with your phone:');
+    });
+    await whatsappClient.initialize();
+}
+
+startWhatsAppBot();
+
+const SendMsg = async (targetNumber, message) => {
+    console.log('Sending message...');
+    try {
+        await whatsappClient.sendMessage(targetNumber, message);
+        console.log('Message sent successfully');
+        return true;
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ success: false, error: 'Error sending the message' });
+        console.error('Error sending message:', error);
+        throw error;
+    }
+};
+
+
+app.post('/api/whatsapp',  async (req, res) => {
+    const message = req.body.message;
+    const phone = req.body.phone;
+    const targetNumber = `51${phone}@c.us`;
+
+    try {
+        const msg = await SendMsg(targetNumber, message);
+        res.json(msg? { message: 'Message sent successfully' } : { message: 'Error sending message' });
+    } catch (error) {
+        res.status(500).json({ error: 'Error sending message' });
     }
 });
-
-// Other configuration code for the REST API
-// ...
 
 const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`REST API server listening on port ${PORT}`);
 });
+
 
 ```
 ### Complete example
@@ -291,22 +316,47 @@ Aquí tienes un ejemplo básico de cómo podría estructurarse el código dentro
 ```javascript
 // Ejemplo de integración en una API REST
 const express = require('express');
+const { launchBrowser, whatsappClient } = require('whatsapp-connect');
 const app = express();
 
-app.post('/send-message', async (req, res) => {
-    try {
-         // Lógica para enviar el mensaje a través de WhatsApp
-        // ...
+app.use(express.json());
 
-        res.status(200).json({ success: true, message: 'Message sent successfully' });
+
+async function startWhatsAppBot() {
+    const browserInstance = await launchBrowser();
+    whatsappClient.on('qr', async qr => {
+        console.log('Scan the following QR code with your phone:');
+    });
+    await whatsappClient.initialize();
+}
+
+startWhatsAppBot();
+
+const SendMsg = async (targetNumber, message) => {
+    console.log('Sending message...');
+    try {
+        await whatsappClient.sendMessage(targetNumber, message);
+        console.log('Message sent successfully');
+        return true;
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ success: false, error: 'Error sending the message' });
+        console.error('Error sending message:', error);
+        throw error;
+    }
+};
+
+
+app.post('/api/whatsapp',  async (req, res) => {
+    const message = req.body.message;
+    const phone = req.body.phone;
+    const targetNumber = `51${phone}@c.us`;
+
+    try {
+        const msg = await SendMsg(targetNumber, message);
+        res.json(msg? { message: 'Message sent successfully' } : { message: 'Error sending message' });
+    } catch (error) {
+        res.status(500).json({ error: 'Error sending message' });
     }
 });
-
-// Otro código de configuración para la API REST
-// ...
 
 const PORT = 3000;
 app.listen(PORT, () => {
