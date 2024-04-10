@@ -13,7 +13,7 @@ async function launchBrowser() {
 }
 
 // Objeto que representa el cliente de WhatsApp
-    // const client = new Client({
+    // const whatsappClient =   new Client({
     //     webVersionCache: {
     //         type: 'remote',
     //         remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2410.1.html',
@@ -26,7 +26,7 @@ async function launchBrowser() {
     // });
 
 
-    // const client = new Client({
+    // const whatsappClient =  new Client({
     //     webVersionCache: {
     //         type: 'remote',
     //         remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2402.5.html',
@@ -38,7 +38,7 @@ async function launchBrowser() {
     //     }
     // });
 
-    const client = new Client({
+    const whatsappClient =   new Client({
         webVersionCache: {
             type: 'remote',
             remotePath: 'https://raw.githubusercontent.com/fralch/CrediWhatsapp-connect/main/wcache.html',
