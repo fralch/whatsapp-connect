@@ -13,17 +13,17 @@ async function launchBrowser() {
 }
 
 // Objeto que representa el cliente de WhatsApp
-    // const whatsappClient =   new Client({
-    //     webVersionCache: {
-    //         type: 'remote',
-    //         remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2410.1.html',
-    //         },
-    //     authStrategy: new LocalAuth(),
-    //     puppeteer: {
-    //         headless: true,
-    //         args: ["--no-sandbox"]
-    //     }
-    // });
+    const whatsappClient =   new Client({
+        webVersionCache: {
+            type: 'remote',
+            remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2410.1.html',
+            },
+        authStrategy: new LocalAuth(),
+        puppeteer: {
+            headless: true,
+            args: ["--no-sandbox"]
+        }
+    });
 
 
     // const whatsappClient =  new Client({
@@ -38,17 +38,17 @@ async function launchBrowser() {
     //     }
     // });
 
-    const whatsappClient =   new Client({
-        webVersionCache: {
-            type: 'remote',
-            remotePath: 'https://raw.githubusercontent.com/fralch/CrediWhatsapp-connect/main/wcache.html',
-            },
-        authStrategy: new LocalAuth(),
-        puppeteer: {
-            headless: true,
-            args: ["--no-sandbox"]
-        }
-    });
+    // const whatsappClient =   new Client({
+    //     webVersionCache: {
+    //         type: 'remote',
+    //         remotePath: 'https://raw.githubusercontent.com/fralch/CrediWhatsapp-connect/main/wcache.html',
+    //         },
+    //     authStrategy: new LocalAuth(),
+    //     puppeteer: {
+    //         headless: true,
+    //         args: ["--no-sandbox"]
+    //     }
+    // });
 
 // Evento para generar y guardar un código QR
 whatsappClient.on('qr', async qr => {
